@@ -15,7 +15,7 @@ const Slider = () => {
       .then((data) => setEvents(data));
   }, []);
 
-  console.log(events);
+  // console.log(events);
   return (
     <div className="w-[99%] mx-auto h-150">
       <Swiper

@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/AuthProvider.jsx";
 import { RouterProvider } from "react-router";
 import { router } from "./router/Route.jsx";
 import Loader from "./components/Loader.jsx";
+import "goey-toast/styles.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

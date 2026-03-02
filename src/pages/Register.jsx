@@ -1,11 +1,138 @@
-import React from 'react';
+import { gooeyToast, GooeyToaster } from "goey-toast";
+import { Calendar, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import React, { useContext, useState } from "react";
+import { PiPerson } from "react-icons/pi";
+import { Link } from "react-router";
+import { AuthContext } from "../context/AuthProvider";
 
 const Register = () => {
-    return (
-        <div>
-            
+  const { user, setUser, register, updateUser } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    if (name.length === 0) {
+      gooeyToast.error("Enter your name!");
+      return;
+    }
+    const image = e.target.image.value;
+    if (image.length === "") {
+      gooeyToast.error("Enter your name!");
+      return;
+    }
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+
+  };
+  return (
+    <>
+      <GooeyToaster position="top-center" theme="dark" />
+      <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center space-x-2 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary via-secondary to-accent flex items-center justify-center">
+              <Calendar className="w-7 h-7 text-white"></Calendar>
+            </div>
+            <span className="text-2xl font-bold bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              Event Explorer
+            </span>
+          </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Welcome Back
+          </h1>
+          <p className="text-[#938e88]">Sign in to continue your journey</p>
         </div>
-    );
+        {/* Form */}
+        <div className="p-8 rounded-2xl bg-base-200 backdrop-blur-xl border border-base-300 shadow-2xl">
+          <form onSubmit={handleRegister} className="w-100">
+            <div className="">
+              <label className="flex items-center gap-2">
+                <User className="text-primary w-5 h-5"></User>{" "}
+                <span className="font-bold">Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="input rounded-4xl mt-2 bg-base-300 w-full"
+                required
+              />
+            </div>
+            <div className="mt-5">
+              <label className="flex items-center gap-2">
+                <Mail className="text-secondary w-5 h-5"></Mail>{" "}
+                <span className="font-bold">Email</span>
+              </label>
+              <input
+                type="text"
+                name="email"
+                placeholder="Enter your email"
+                className="input rounded-4xl mt-2 bg-base-300 w-full"
+                required
+              />
+            </div>
+            <div className="mt-5">
+              <label className="flex items-center gap-2">
+                <Mail className="text-primary w-5 h-5"></Mail>{" "}
+                <span className="font-bold">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                name="image"
+                placeholder="Enter a photoURL"
+                className="input rounded-4xl mt-2 bg-base-300 w-full"
+                required
+              />
+            </div>
+            <div className="mt-5 ">
+              <label className="flex items-center gap-2">
+                <Lock className="text-secondary w-5 h-5"></Lock>{" "}
+                <span className="font-bold">Password:</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter your password"
+                  className="input rounded-4xl mt-2 bg-base-300 w-full"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-6 -translate-y-0.5"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <button className="btn mt-4 w-full py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
+              Sign In
+            </button>
+          </form>
+          <hr className="my-5 text-[#938e88]" />
+          <div>
+            <p className="text-sm text-center">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-secondary underline hover:text-warning"
+              >
+                Login
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Register;
