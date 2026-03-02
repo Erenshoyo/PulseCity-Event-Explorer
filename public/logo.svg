@@ -1,0 +1,12 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="36" stroke="#7C83FD" stroke-width="4" fill="none"/>
+  <circle cx="40" cy="40" r="28" stroke="#00D4FF" stroke-width="2" fill="none"/>
+  
+  <!-- Pulse inside -->
+  <polyline points="18,45 28,30 38,55 48,25 58,45"
+            fill="none"
+            stroke="#00D4FF"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+</svg>

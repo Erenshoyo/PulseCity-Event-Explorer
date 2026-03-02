@@ -21,27 +21,29 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const register = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password);
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const googleLogin = () => {
-    signInWithPopup(auth, googleProvider);
+    return signInWithPopup(auth, googleProvider);
   };
 
   const logout = () => {
-    signOut(auth);
+    return signOut(auth);
   };
 
   const updateUser = (data) => {
-    updateProfile(auth.currentUser, data);
+    return updateProfile(auth.currentUser, data);
   };
 
   const resetPassword = (email) => {
-    sendPasswordResetEmail(auth, email);
+    return sendPasswordResetEmail(auth, email);
   };
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   const authData = {
@@ -65,6 +67,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider authData={authData}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
   );
 };
