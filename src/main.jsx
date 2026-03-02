@@ -7,10 +7,12 @@ import { RouterProvider } from "react-router";
 import { router } from "./router/Route.jsx";
 import Loader from "./components/Loader.jsx";
 import "goey-toast/styles.css";
+import { GooeyToaster } from "goey-toast";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
+      <GooeyToaster position="top-center" theme="dark" />
       <RouterProvider
         router={router}
         fallbackElement={<Loader></Loader>}

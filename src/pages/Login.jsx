@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
 import { gooeyToast, GooeyToaster } from "goey-toast";
+import { BsGoogle } from "react-icons/bs";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -92,11 +93,23 @@ const Login = () => {
                 Forgot password?
               </Link>
             </div>
-            <button className="btn mt-4 w-full py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
+            <button className="btn my-4 w-full rounded-4xl py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
               Sign In
             </button>
           </form>
-          <hr className="my-5 text-[#938e88]" />
+          <div className="relative">
+            <hr className="my-5 text-base-300" />
+            <p className="absolute -top-2.5 bg-base-300 px-4 text-[#938e88] left-33 text-sm">
+              Or continue with
+            </p>
+          </div>
+
+          <div className="btn w-full rounded-4xl my-5 py-6">
+            <button className="flex justify-center items-center gap-4 text-sm">
+              <BsGoogle />
+              <span>Continue with Google</span>
+            </button>
+          </div>
           <div>
             <p className="text-sm text-center">
               Don't have an account?{" "}

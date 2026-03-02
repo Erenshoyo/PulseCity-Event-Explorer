@@ -1,14 +1,18 @@
-import { gooeyToast, GooeyToaster } from "goey-toast";
+import { gooeyToast } from "goey-toast";
 import { Calendar, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import React, { useContext, useState } from "react";
-import { PiPerson } from "react-icons/pi";
-import { Link } from "react-router";
+
+import { Link, Navigate } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
+import { BsGoogle } from "react-icons/bs";
 
 const Register = () => {
   const { user, setUser, register, updateUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
+  if (user) {
+    return <Navigate to="/"></Navigate>;
+  }
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -17,18 +21,31 @@ const Register = () => {
       return;
     }
     const image = e.target.image.value;
-    if (image.length === "") {
-      gooeyToast.error("Enter your name!");
+    if (image === "") {
+      gooeyToast.error("Enter a photoURL!");
       return;
     }
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-
+    register(email, password)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: image }).then(() => {
+          setUser({ ...user, displayName: name, photoURL: image }).catch(() => {
+            setUser(user);
+          });
+        });
+        gooeyToast.success("You are successfully registered!");
+      })
+      .catch((error) => {
+        gooeyToast.error(
+          error.message || "Failed to sign in. Please try again.",
+        );
+      });
   };
   return (
     <>
-      <GooeyToaster position="top-center" theme="dark" />
       <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12">
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-2 mb-4">
@@ -113,11 +130,23 @@ const Register = () => {
               </div>
             </div>
 
-            <button className="btn mt-4 w-full py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
-              Sign In
+            <button className="btn my-4 w-full rounded-4xl py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
+              Create Account
             </button>
           </form>
-          <hr className="my-5 text-[#938e88]" />
+          <div className="relative">
+            <hr className="my-5 text-base-300" />
+            <p className="absolute -top-2.5 bg-base-300 px-4 text-[#938e88] left-33 text-sm">
+              Or register with
+            </p>
+          </div>
+
+          <div className="btn w-full rounded-4xl my-5 py-6">
+            <button className="flex justify-center items-center gap-4 text-sm">
+              <BsGoogle />
+              <span>Register with Google</span>
+            </button>
+          </div>
           <div>
             <p className="text-sm text-center">
               Already have an account?{" "}
