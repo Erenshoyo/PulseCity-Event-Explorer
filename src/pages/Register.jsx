@@ -7,40 +7,104 @@ import { AuthContext } from "../context/AuthProvider";
 import { BsGoogle } from "react-icons/bs";
 
 const Register = () => {
-  const { user, setUser, register, updateUser } = useContext(AuthContext);
+  const { user, setUser, register, updateUser, googleLogin } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   if (user) {
     return <Navigate to="/"></Navigate>;
   }
+
+  const validatePassword = (value) => {
+    if (value.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+
+    if (!/[A-Z]/.test(value)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+
+    if (!/[a-z]/.test(value)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+
+    return null;
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
+    const image = e.target.image.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
     if (name.length === 0) {
       gooeyToast.error("Enter your name!");
       return;
     }
-    const image = e.target.image.value;
     if (image === "") {
       gooeyToast.error("Enter a photoURL!");
       return;
     }
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
+    const error = validatePassword(password);
+
+    if (error) {
+      gooeyToast.error(error, {
+        id: "password-error",
+        classNames: {
+          wrapper: "protect-gooey-wrapper",
+        },
+      });
+      return;
+    }
     register(email, password)
       .then((result) => {
         const user = result.user;
+
         updateUser({ displayName: name, photoURL: image }).then(() => {
           setUser({ ...user, displayName: name, photoURL: image }).catch(() => {
             setUser(user);
           });
         });
-        gooeyToast.success("You are successfully registered!");
+
+        gooeyToast.success("You are successfully registered!", {
+          classNames: {
+            wrapper: "protect-gooey-wrapper",
+          },
+        });
       })
       .catch((error) => {
         gooeyToast.error(
           error.message || "Failed to sign in. Please try again.",
+          {
+            classNames: {
+              wrapper: "protect-gooey-wrapper",
+            },
+          },
+        );
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        gooeyToast.success("You are successfully registered!", {
+          classNames: {
+            wrapper: "protect-gooey-wrapper",
+          },
+        });
+      })
+      .catch((error) => {
+        gooeyToast.error(
+          error.message || "Failed to register. Please try again.",
+          {
+            classNames: {
+              wrapper: "protect-gooey-wrapper",
+            },
+          },
         );
       });
   };
@@ -114,6 +178,25 @@ const Register = () => {
                   name="password"
                   placeholder="Enter your password"
                   className="input rounded-4xl mt-2 bg-base-300 w-full"
+                  value={password}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setPassword(value);
+
+                    const error = validatePassword(value);
+                    setPasswordError(error || "");
+
+                    // if (value.length > 0 && error) {
+                    //   gooeyToast.error(error, {
+                    //     id: error,
+                    //     classNames: {
+                    //       wrapper: "protect-gooey-wrapper",
+                    //     },
+                    //   });
+                    // } else {
+                    //   gooeyToast.dismiss(error);
+                    // }
+                  }}
                   required
                 />
                 <button
@@ -129,8 +212,18 @@ const Register = () => {
                 </button>
               </div>
             </div>
-
-            <button className="btn my-4 w-full rounded-4xl py-6 text-lg bg-linear-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity">
+            {passwordError && (
+              <p className="text-error text-sm mt-2 text-center">
+                {passwordError}
+              </p>
+            )}
+            <button
+              disabled={!!passwordError || password.length === 0}
+              className="btn my-4 w-full rounded-4xl py-6 text-lg 
+              bg-linear-to-r from-primary via-secondary to-accent 
+              hover:opacity-90 transition-opacity
+              disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               Create Account
             </button>
           </form>
@@ -142,7 +235,10 @@ const Register = () => {
           </div>
 
           <div className="btn w-full rounded-4xl my-5 py-6">
-            <button className="flex justify-center items-center gap-4 text-sm">
+            <button
+              onClick={handleGoogleLogin}
+              className="flex justify-center items-center gap-4 text-sm"
+            >
               <BsGoogle />
               <span>Register with Google</span>
             </button>

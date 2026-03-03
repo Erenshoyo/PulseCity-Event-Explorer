@@ -1,9 +1,31 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Link } from "react-router";
+import { gooeyToast } from "goey-toast";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        gooeyToast.success("You are successfully logged out!", {
+          classNames: {
+            wrapper: "protect-gooey-wrapper",
+          },
+        });
+      })
+      .catch((error) => {
+        gooeyToast.error(
+          error.message || "Failed to logout. Please try again.",
+          {
+            classNames: {
+              wrapper: "protect-gooey-wrapper",
+            },
+          },
+        );
+      });
+  };
   return (
     <div className="bg-base-300 flex justify-between p-3 rounded-2xl lg:px-20">
       <div className="flex items-center gap-2">
@@ -28,7 +50,7 @@ const Navbar = () => {
         {user ? (
           <button
             className="bg-primary px-3 py-2 rounded-xl font-semibold text-sm"
-            onClick={logout}
+            onClick={handleLogout}
           >
             Logout
           </button>

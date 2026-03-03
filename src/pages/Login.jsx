@@ -1,33 +1,70 @@
 import { Calendar, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthProvider";
-import { gooeyToast, GooeyToaster } from "goey-toast";
+import { gooeyToast } from "goey-toast";
 import { BsGoogle } from "react-icons/bs";
 
 const Login = () => {
-  // const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login, user, googleLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+
+  if (user) return <Navigate to={from} replace></Navigate>;
+
   const handleLogIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     login(email, password)
-      .then((result) => {
-        console.log(result.user);
-        gooeyToast.success("Sign In Successful");
+      .then(() => {
+        // console.log(result.user);
+        gooeyToast.success("Sign In Successful", {
+          classNames: {
+            wrapper: "protect-gooey-wrapper",
+          },
+        });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         gooeyToast.error(
           error.message || "Failed to sign in. Please try again.",
+          {
+            classNames: {
+              wrapper: "protect-gooey-wrapper",
+            },
+          },
+        );
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        gooeyToast.success("You are successfully logged in!", {
+          classNames: {
+            wrapper: "protect-gooey-wrapper",
+          },
+        });
+      })
+      .catch((error) => {
+        gooeyToast.error(
+          error.message || "Failed to sign in. Please try again.",
+          {
+            classNames: {
+              wrapper: "protect-gooey-wrapper",
+            },
+          },
         );
       });
   };
 
   return (
     <>
-      <GooeyToaster position="top-center" theme="dark" />
+      {/* <GooeyToaster position="top-center" theme="dark" /> */}
       <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12">
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-2 mb-4">
@@ -59,7 +96,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mt-10 ">
+            <div className="mt-5">
               <label className="flex items-center gap-2">
                 <Lock className="text-secondary w-5 h-5"></Lock>{" "}
                 <span className="font-bold">Password:</span>
@@ -105,7 +142,10 @@ const Login = () => {
           </div>
 
           <div className="btn w-full rounded-4xl my-5 py-6">
-            <button className="flex justify-center items-center gap-4 text-sm">
+            <button
+              onClick={handleGoogleLogin}
+              className="flex justify-center items-center gap-4 text-sm"
+            >
               <BsGoogle />
               <span>Continue with Google</span>
             </button>
