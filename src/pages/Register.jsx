@@ -185,17 +185,6 @@ const Register = () => {
 
                     const error = validatePassword(value);
                     setPasswordError(error || "");
-
-                    // if (value.length > 0 && error) {
-                    //   gooeyToast.error(error, {
-                    //     id: error,
-                    //     classNames: {
-                    //       wrapper: "protect-gooey-wrapper",
-                    //     },
-                    //   });
-                    // } else {
-                    //   gooeyToast.dismiss(error);
-                    // }
                   }}
                   required
                 />

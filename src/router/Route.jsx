@@ -9,11 +9,13 @@ import ForgetPassword from "../pages/ForgetPassword";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage";
+import Loader from "../components/Loader";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
+    hydrateFallbackElement: <Loader></Loader>,
     children: [
       {
         index: true,
@@ -38,6 +40,7 @@ export const router = createBrowserRouter([
             <EventDetails></EventDetails>
           </PrivateRoute>
         ),
+        loader: () => fetch("/events.json"),
       },
       {
         path: "/profile",

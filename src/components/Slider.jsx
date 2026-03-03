@@ -46,7 +46,7 @@ const Slider = () => {
                 <h2 className="text-4xl font-bold mb-2">{event.name}</h2>
                 <p className="text-lg opacity-90">{event.location}</p>
                 <p className="text-sm opacity-70">{event.date}</p>
-                <Link to={`/event/${events.id}`} className="btn btn-primary mt-2">Explore Event</Link>
+                <Link to={`/event/${event.id}`} className="btn btn-primary mt-2">Explore Event</Link>
               </div>
             </div>
           </SwiperSlide>
