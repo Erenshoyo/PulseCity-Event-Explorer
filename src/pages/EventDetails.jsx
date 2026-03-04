@@ -27,7 +27,7 @@ const InfoCard = ({ icon: Icon, iconBg, iconColor, label, value }) => (
   </div>
 );
 
-const ReservationForm = ({ currency, entry_fee, eventName }) => {
+const ReservationForm = ({ currency, entry_fee, eventName, eventImage }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "" });
@@ -48,14 +48,27 @@ const ReservationForm = ({ currency, entry_fee, eventName }) => {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const next = validate();
     if (Object.keys(next).length) return setErrors(next);
 
     setLoading(true);
-    // Simulate async submission
-    await new Promise((r) => setTimeout(r, 1200));
+
+    const booking = {
+      id: Date.now(),
+      eventName,
+      eventImage,
+      entry_fee,
+      currency,
+      name: form.name,
+      email: form.email,
+      bookedAt: new Date().toISOString(),
+    };
+
+    const existing = JSON.parse(localStorage.getItem("bookings") || "[]");
+    localStorage.setItem("bookings", JSON.stringify([...existing, booking]));
+
     setLoading(false);
     setSubmitted(true);
   };
@@ -77,7 +90,7 @@ const ReservationForm = ({ currency, entry_fee, eventName }) => {
   }
 
   return (
-    <form  onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} noValidate>
       {/* Full Name */}
       <div>
         <label
@@ -239,7 +252,10 @@ const EventDetails = () => {
       </div>
 
       {/* Body */}
-      <div data-aos="fade-up" className="w-2/3 mx-auto grid grid-cols-3 mt-8 gap-6">
+      <div
+        data-aos="fade-up"
+        className="w-2/3 mx-auto grid grid-cols-3 mt-8 gap-6"
+      >
         {/* Left: Info + Description */}
         <div className="col-span-2 space-y-5">
           {/* Info cards — 2×2 grid */}
@@ -257,7 +273,10 @@ const EventDetails = () => {
           </div>
 
           {/* Description */}
-          <section data-aos="fade-up" className="rounded-3xl bg-base-200 px-8 py-6">
+          <section
+            data-aos="fade-up"
+            className="rounded-3xl bg-base-200 px-8 py-6"
+          >
             <div className="flex items-center gap-3 mb-4">
               <Tag className="w-5 h-5 text-primary" />
               <span className="text-lg font-semibold">About this event</span>
@@ -269,7 +288,10 @@ const EventDetails = () => {
         </div>
 
         {/* Right: Reservation */}
-        <div data-aos="fade-up" className="h-fit p-7 rounded-3xl bg-base-200 border border-base-300 shadow-2xl sticky top-8">
+        <div
+          data-aos="fade-up"
+          className="h-fit p-7 rounded-3xl bg-base-200 border border-base-300 shadow-2xl sticky top-8"
+        >
           <h3 className="mb-6 text-xl font-bold flex items-center gap-2">
             <Ticket className="w-5 h-5 text-primary" /> Reserve Your Seat
           </h3>
@@ -277,6 +299,7 @@ const EventDetails = () => {
             currency={currency}
             entry_fee={entry_fee}
             eventName={name}
+            eventImage={thumbnail}
           />
         </div>
       </div>
