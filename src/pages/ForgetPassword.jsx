@@ -1,14 +1,11 @@
 import { ArrowLeft, Calendar, Mail } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { gooeyToast } from "goey-toast"; // Assuming you have this from the previous component
+import { gooeyToast } from "goey-toast";
 
 const ForgetPassword = () => {
-  // 💡 SENIOR DEV TIP: Properly invoke useLocation to read the router state.
   const location = useLocation();
 
-  // 💡 SENIOR DEV TIP: Initialize state directly from the router.
-  // No useEffect or eslint-disable comments needed!
   const [email, setEmail] = useState(location.state?.email || "");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -16,23 +13,19 @@ const ForgetPassword = () => {
     e.preventDefault();
     setIsSubmitted(true);
 
-    // Give the user immediate visual feedback
     gooeyToast.success("Reset link sent to your email!", {
       classNames: { wrapper: "protect-gooey-wrapper" },
     });
 
-    // UX: Give them a moment to read the success message before opening Gmail
     setTimeout(() => {
       window.open("https://mail.google.com", "_blank");
-      setIsSubmitted(false); // Reset state in case they come back to this tab
+      setIsSubmitted(false);
     }, 1500);
   };
 
   return (
-    // Added min-h-screen to ensure the form stays vertically centered
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-base-100">
       <div className="w-full max-w-md">
-        {/* --- HEADER SECTION --- */}
         <div className="mb-8 text-center">
           <div className="inline-flex items-center justify-center mb-6 space-x-3">
             <div className="flex items-center justify-center w-12 h-12 shadow-lg rounded-2xl bg-primary shadow-primary/30">
@@ -50,7 +43,6 @@ const ForgetPassword = () => {
           </p>
         </div>
 
-        {/* --- FORM CARD --- */}
         <div className="p-8 border shadow-2xl rounded-3xl bg-base-200/50 backdrop-blur-xl border-base-300">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
@@ -81,7 +73,6 @@ const ForgetPassword = () => {
               {isSubmitted ? "Sending..." : "Reset Password"}
             </button>
 
-            {/* 💡 A11y Fix: Styled the Link directly instead of nesting a <button> */}
             <Link
               to="/login"
               className="flex items-center justify-center w-full py-4 text-sm font-semibold transition-colors border-2 rounded-2xl border-base-300 text-base-content/70 hover:bg-base-300 hover:text-base-content"
