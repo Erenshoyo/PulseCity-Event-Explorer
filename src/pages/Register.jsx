@@ -113,10 +113,10 @@ const Register = () => {
       <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12">
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-2 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary via-secondary to-accent flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
               <Calendar className="w-7 h-7 text-white"></Calendar>
             </div>
-            <span className="text-2xl font-bold bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-primary bg-clip-text text-transparent">
               Event Explorer
             </span>
           </div>
@@ -209,9 +209,8 @@ const Register = () => {
             <button
               disabled={!!passwordError || password.length === 0}
               className="btn my-4 w-full rounded-4xl py-6 text-lg 
-              bg-linear-to-r from-primary via-secondary to-accent 
-              hover:opacity-90 transition-opacity
-              disabled:opacity-50 disabled:cursor-not-allowed"
+              bg-primary hover:opacity-90 transition-opacity
+              disabled:opacity-90 disabled:cursor-not-allowed"
             >
               Create Account
             </button>

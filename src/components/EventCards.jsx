@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
 
+import Aos from "aos";
+
 const EventCards = () => {
   const [events, setEvents] = useState([]);
   const [showAll, setShowAll] = useState(false);
@@ -11,6 +13,9 @@ const EventCards = () => {
       .then((data) => setEvents(data));
   }, []);
 
+  useEffect(() => {
+    Aos.refresh();
+  }, [showAll, events]);
   const displayedEvents = showAll ? events : events.slice(0, 6);
 
   // console.log(events);
@@ -23,8 +28,14 @@ const EventCards = () => {
       {/* EventCards */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {displayedEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
+        {displayedEvents.map((event, index) => (
+          <div
+            key={event.id}
+            data-aos="fade-up"
+            data-aos-delay={(index % 6) * 50}
+          >
+            <EventCard event={event} />
+          </div>
         ))}
       </div>
       {events.length > 6 && (

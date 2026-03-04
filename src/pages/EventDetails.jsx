@@ -77,7 +77,7 @@ const ReservationForm = ({ currency, entry_fee, eventName }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form  onSubmit={handleSubmit} noValidate>
       {/* Full Name */}
       <div>
         <label
@@ -213,7 +213,7 @@ const EventDetails = () => {
   }
 
   return (
-    <div className="min-h-screen mt-10 pb-16">
+    <div data-aos="fade-up" className="min-h-screen mt-10 pb-16">
       {/* Hero */}
       <div className="relative h-64 md:h-125">
         {thumbnail && (
@@ -239,7 +239,7 @@ const EventDetails = () => {
       </div>
 
       {/* Body */}
-      <div className="w-2/3 mx-auto grid grid-cols-3 mt-8 gap-6">
+      <div data-aos="fade-up" className="w-2/3 mx-auto grid grid-cols-3 mt-8 gap-6">
         {/* Left: Info + Description */}
         <div className="col-span-2 space-y-5">
           {/* Info cards — 2×2 grid */}
@@ -257,7 +257,7 @@ const EventDetails = () => {
           </div>
 
           {/* Description */}
-          <section className="rounded-3xl bg-base-200 px-8 py-6">
+          <section data-aos="fade-up" className="rounded-3xl bg-base-200 px-8 py-6">
             <div className="flex items-center gap-3 mb-4">
               <Tag className="w-5 h-5 text-primary" />
               <span className="text-lg font-semibold">About this event</span>
@@ -269,7 +269,7 @@ const EventDetails = () => {
         </div>
 
         {/* Right: Reservation */}
-        <div className="h-fit p-7 rounded-3xl bg-base-200 border border-base-300 shadow-2xl sticky top-8">
+        <div data-aos="fade-up" className="h-fit p-7 rounded-3xl bg-base-200 border border-base-300 shadow-2xl sticky top-8">
           <h3 className="mb-6 text-xl font-bold flex items-center gap-2">
             <Ticket className="w-5 h-5 text-primary" /> Reserve Your Seat
           </h3>
