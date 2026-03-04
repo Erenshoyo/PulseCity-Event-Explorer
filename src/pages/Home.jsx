@@ -13,6 +13,7 @@ const Home = () => {
       iconBg: "bg-lime-800",
       iconColor: "text-primary",
       background: "bg-green-500/10",
+      shadow: "132, 204, 22",
       description:
         "Meet like-minded individuals and expand your professional and social network at exciting events.",
     },
@@ -23,6 +24,7 @@ const Home = () => {
       iconBg: "bg-red-800",
       iconColor: "text-secondary",
       background: "bg-red-500/10",
+      shadow: "239, 68, 68",
       description:
         "Step out of your comfort zone and discover new interests, skills, and passions through diverse events.",
     },
@@ -34,6 +36,7 @@ const Home = () => {
       iconBg: "bg-pink-800",
       iconColor: "text-accent",
       background: "bg-pink-500/10",
+      shadow: "236, 72, 153",
       description:
         "Learn from experts, gain valuable insights, and accelerate your personal and professional development.",
     },
@@ -50,8 +53,12 @@ const Home = () => {
         <Trendings></Trendings>
       </main>
       <section data-aos="fade-up" className="w-2/3 mx-auto mt-34">
-        <h1 className="text-center text-4xl font-bold mb-3">Why join Events?</h1>
-        <p className="text-center text-sm text-[#938e88] mb-6">Experience unforgettable moments and create lasting memories</p>
+        <h1 className="text-center text-4xl font-bold mb-3">
+          Why join Events?
+        </h1>
+        <p className="text-center text-sm text-[#938e88] mb-6">
+          Experience unforgettable moments and create lasting memories
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-25">
           {INFO_CARDS.map((card) => {
             const Icon = card.icon;
@@ -60,7 +67,13 @@ const Home = () => {
               <div
                 data-aos="fade-up"
                 key={card.key}
-                className={`${card.background} p-6 rounded-2xl flex flex-col items-center text-center`}
+                className={`${card.background} p-6 rounded-2xl flex flex-col items-center text-center transition-all duration-300 hover:scale-[1.03]`}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = `0 0 25px rgba(${card.shadow}, 0.5)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
                 <div
                   className={`${card.iconBg} ${card.iconColor} p-4 rounded-full mb-4`}
