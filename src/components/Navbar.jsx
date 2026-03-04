@@ -27,7 +27,7 @@ const Navbar = () => {
       });
   };
   return (
-    <div className="bg-base-300 flex justify-between p-3 rounded-2xl lg:px-20">
+    <div className="flex justify-between p-3 rounded-2xl lg:px-20">
       <div className="flex items-center gap-2">
         <img className="w-8" src="/logo2.svg" alt="" />
         <Link

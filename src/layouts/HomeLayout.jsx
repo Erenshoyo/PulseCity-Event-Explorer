@@ -15,7 +15,7 @@ const HomeLayout = () => {
   }, []);
   return (
     <div>
-      <div className="w-2/3 mx-auto mt-5">
+      <div className="sticky top-3 z-50 backdrop-blur-xl rounded-2xl bg-base-300/60 w-2/3 mx-auto mt-5">
         <Navbar></Navbar>
       </div>
       <Outlet></Outlet>
