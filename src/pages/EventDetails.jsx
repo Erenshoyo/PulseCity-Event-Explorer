@@ -238,7 +238,7 @@ const EventDetails = () => {
         )}
         <div className="absolute inset-0 bg-linear-to-t from-base-100 via-black/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
-          <div className="w-2/3 mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="w-11/12 md:w-2/3 mx-auto px-4 sm:px-6 lg:px-8 pb-8">
             {category && (
               <span className="inline-block px-3 py-1 text-xs rounded-full border border-primary bg-black/60 backdrop-blur mb-3">
                 {category}
@@ -254,10 +254,10 @@ const EventDetails = () => {
       {/* Body */}
       <div
         data-aos="fade-up"
-        className="w-2/3 mx-auto grid grid-cols-3 mt-8 gap-6"
+        className="w-11/12 md:w-4/5 lg:w-2/3 mx-auto grid grid-cols-1 lg:grid-cols-3 mt-8 gap-6"
       >
         {/* Left: Info + Description */}
-        <div className="col-span-2 space-y-5">
+        <div className="col-span-1 lg:col-span-2 space-y-5">
           {/* Info cards — 2×2 grid */}
           <div className="grid grid-cols-2 gap-4">
             {INFO_CARDS.map(({ key, label, icon, iconBg, iconColor }) => (

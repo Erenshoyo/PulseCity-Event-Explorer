@@ -23,7 +23,7 @@ const Trendings = () => {
   // console.log(events);
   return (
     <div>
-      <h1 className="mt-14 text-4xl font-bold flex items-center gap-4">
+      <h1 className="mt-14 text-3xl md:text-4xl font-bold flex items-center gap-4">
         <TrendingUp className="w-9 h-9 text-secondary" />
         Trending Now
       </h1>

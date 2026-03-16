@@ -8,7 +8,6 @@ import { BsGoogle } from "react-icons/bs";
 const Login = () => {
   const { login, user, googleLogin } = useContext(AuthContext);
 
-
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -72,8 +71,8 @@ const Login = () => {
       </div>
 
       {/* Form */}
-      <div className="p-8 border shadow-2xl rounded-2xl bg-base-200 backdrop-blur-xl border-base-300">
-        <form onSubmit={handleLogIn} className="w-100">
+      <div className="p-6 sm:p-8 border shadow-2xl rounded-2xl bg-base-200 backdrop-blur-xl border-base-300 w-full max-w-md">
+        <form onSubmit={handleLogIn} className="w-full sm:w-100">
           <div>
             <label className="flex items-center gap-2">
               <Mail className="w-5 h-5 text-primary"></Mail>{" "}
@@ -146,7 +145,7 @@ const Login = () => {
         <div className="py-6 my-5 w-full btn rounded-4xl">
           <button
             onClick={handleGoogleLogin}
-            type="button" 
+            type="button"
             className="flex items-center justify-center w-full gap-4 text-sm"
           >
             <BsGoogle />

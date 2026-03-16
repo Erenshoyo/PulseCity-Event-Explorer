@@ -48,12 +48,15 @@ const Home = () => {
         <Slider></Slider>
       </section>
       {/* Events Card */}
-      <main className="w-2/3 mx-auto">
+      <main className="w-11/12 md:w-4/5 lg:w-2/3 mx-auto">
         <EventCard></EventCard>
         <Trendings></Trendings>
       </main>
-      <section data-aos="fade-up" className="w-2/3 mx-auto mt-34">
-        <h1 className="text-center text-4xl font-bold mb-3">
+      <section
+        data-aos="fade-up"
+        className="w-11/12 md:w-4/5 lg:w-2/3 mx-auto mt-16 md:mt-34"
+      >
+        <h1 className="text-center text-3xl md:text-4xl font-bold mb-3">
           Why join Events?
         </h1>
         <p className="text-center text-sm text-[#938e88] mb-6">

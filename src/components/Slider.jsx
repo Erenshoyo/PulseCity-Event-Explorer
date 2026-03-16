@@ -23,7 +23,7 @@ const Slider = () => {
 
   // console.log(events);
   return (
-    <div className="w-[99%] mx-auto h-150">
+    <div className="w-[99%] mx-auto h-56 sm:h-80 md:h-150">
       <Swiper
         cssMode={true}
         navigation={true}
@@ -51,10 +51,14 @@ const Slider = () => {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-              <div className="relative z-10 backdrop-blur-md bg-white/10 p-8 rounded-2xl border border-white/20">
+              <div className="relative z-10 backdrop-blur-md bg-white/10 p-4 sm:p-8 rounded-2xl border border-white/20">
                 {" "}
-                <h2 className="text-4xl font-bold mb-2">{event.name}</h2>
-                <p className="text-lg opacity-90">{event.location}</p>
+                <h2 className="text-2xl sm:text-4xl font-bold mb-2">
+                  {event.name}
+                </h2>
+                <p className="text-base sm:text-lg opacity-90">
+                  {event.location}
+                </p>
                 <p className="text-sm opacity-70">{event.date}</p>
                 <Link
                   to={`/event/${event.id}`}

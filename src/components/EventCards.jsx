@@ -21,7 +21,7 @@ const EventCards = () => {
   // console.log(events);
   return (
     <div>
-      <h1 className="mt-14 text-4xl font-bold">Upcoming Events</h1>
+      <h1 className="mt-14 text-3xl md:text-4xl font-bold">Upcoming Events</h1>
       <p className="mt-2 text-[#938e88]">
         Discover the hottest events happening near you
       </p>

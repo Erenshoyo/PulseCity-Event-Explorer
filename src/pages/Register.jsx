@@ -126,8 +126,8 @@ const Register = () => {
           <p className="text-[#938e88]">Sign in to continue your journey</p>
         </div>
         {/* Form */}
-        <div className="p-8 rounded-2xl bg-base-200 backdrop-blur-xl border border-base-300 shadow-2xl">
-          <form onSubmit={handleRegister} className="w-100">
+        <div className="p-6 sm:p-8 rounded-2xl bg-base-200 backdrop-blur-xl border border-base-300 shadow-2xl w-full max-w-md">
+          <form onSubmit={handleRegister} className="w-full sm:w-100">
             <div className="">
               <label className="flex items-center gap-2">
                 <User className="text-primary w-5 h-5"></User>{" "}
@@ -217,7 +217,7 @@ const Register = () => {
           </form>
           <div className="relative">
             <hr className="my-5 text-base-300" />
-            <p className="absolute -top-2.5 bg-base-300 px-4 text-[#938e88] left-33 text-sm">
+            <p className="absolute -top-2.5 bg-base-300 px-4 text-[#938e88] left-1/2 -translate-x-1/2 text-sm whitespace-nowrap">
               Or register with
             </p>
           </div>

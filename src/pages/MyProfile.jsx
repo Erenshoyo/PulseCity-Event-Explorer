@@ -21,7 +21,7 @@ const MyProfile = () => {
 
   const handleCancel = () => {
     setIsEditing(false);
- 
+
     setDisplayName(user?.displayName || "");
     setPhotoURL(user?.photoURL || "");
   };
@@ -58,7 +58,7 @@ const MyProfile = () => {
     <div className="min-h-screen py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
             My Profile
           </h1>
           <p className="text-muted-foreground">
@@ -66,7 +66,7 @@ const MyProfile = () => {
           </p>
         </div>
 
-        <div className="p-8 rounded-2xl bg-card/40 backdrop-blur-xl border border-border shadow-2xl">
+        <div className="p-5 sm:p-8 rounded-2xl bg-card/40 backdrop-blur-xl border border-border shadow-2xl">
           {/* Avatar Section */}
           <div className="flex flex-col items-center mb-8 pb-8 border-b border-border">
             <div className="relative group">
